@@ -1,22 +1,22 @@
 #include "sort.h"
 
-void swap_ints(int *a, int *b);
+void swap_ints(int *t, int *p);
 int lomuto_partition(int *array, size_t size, int left, int right);
 void lomuto_sort(int *array, size_t size, int left, int right);
 void quick_sort(int *array, size_t size);
 
 /**
  * swap_ints - Swap two integers in an array.
- * @a: The first integer to swap.
- * @b: The second integer to swap.
+ * @t: The first integer to swap.
+ * @p: The second integer to swap.
  */
-void swap_ints(int *a, int *b)
+void swap_ints(int *t, int *p)
 {
 	int tmp;
 
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
+	tmp = *t;
+	*t = *p;
+	*p = tmp;
 }
 
 /**
@@ -31,29 +31,29 @@ void swap_ints(int *a, int *b)
  */
 int lomuto_partition(int *array, size_t size, int left, int right)
 {
-	int *pivot, above, below;
+	int *rise, high, low;
 
-	pivot = array + right;
-	for (above = below = left; below < right; below++)
+	rise = array + right;
+	for (high = low = left; low < right; low++)
 	{
-		if (array[below] < *pivot)
+		if (array[low] < *rise)
 		{
-			if (above < below)
+			if (high < low)
 			{
-				swap_ints(array + below, array + above);
+				swap_ints(array + low, array + high);
 				print_array(array, size);
 			}
-			above++;
+			high++;
 		}
 	}
 
-	if (array[above] > *pivot)
+	if (array[high] > *rise)
 	{
-		swap_ints(array + above, pivot);
+		swap_ints(array + high, rise);
 		print_array(array, size);
 	}
 
-	return (above);
+	return (high);
 }
 
 /**
@@ -67,13 +67,13 @@ int lomuto_partition(int *array, size_t size, int left, int right)
  */
 void lomuto_sort(int *array, size_t size, int left, int right)
 {
-	int part;
+	int pat;
 
 	if (right - left > 0)
 	{
-		part = lomuto_partition(array, size, left, right);
-		lomuto_sort(array, size, left, part - 1);
-		lomuto_sort(array, size, part + 1, right);
+		pat = lomuto_partition(array, size, left, right);
+		lomuto_sort(array, size, left, pat - 1);
+		lomuto_sort(array, size, pat + 1, right);
 	}
 }
 
